@@ -1,7 +1,6 @@
-// imports
 import { useState, useEffect } from 'react';
 import { searchGithub } from '../api/API';
-import CandidateCard from './CanidateCard';
+import CandidateCard from './CandidateCard'; // Fixed typo
 
 interface Candidate {
   login: string;
@@ -14,7 +13,6 @@ interface Candidate {
 }
 
 const CandidateSearch: React.FC = () => {
-    // Necessary code to fetch and display candidates
     const [candidates, setCandidates] = useState<Candidate[]>([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [savedCandidates, setSavedCandidates] = useState<Candidate[]>(() => {
@@ -22,12 +20,22 @@ const CandidateSearch: React.FC = () => {
         return saved ? JSON.parse(saved) : [];
     });
 
-    // Fetch candidates from the API
     useEffect(() => {
         const fetchCandidates = async () => {
             try {
-                const data: Candidate[] = await searchGithub();
-                console.log(data); // Log data to check its structure
+              const response = await fetch('https://api.github.com/users?since=83918688', {
+                headers: {
+                    'Authorization': `token ${import.meta.env.VITE_GITHUB_TOKEN}`, // Use import.meta.env to access the token
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+        
+                const data: Candidate[] = await response.json();
+                console.log(data);
                 setCandidates(data);
             } catch (error) {
                 console.error("Error fetching candidates:", error);
@@ -37,50 +45,43 @@ const CandidateSearch: React.FC = () => {
         fetchCandidates();
     }, []);
 
-    // Save a candidate to the savedCandidates array
     const saveCandidate = () => {
         if (currentIndex < candidates.length) {
             const candidateToSave = candidates[currentIndex];
             const updatedSavedCandidates = [...savedCandidates, candidateToSave];
             setSavedCandidates(updatedSavedCandidates);
             localStorage.setItem('savedCandidates', JSON.stringify(updatedSavedCandidates));
-            setCurrentIndex((prevIndex) => prevIndex + 1);
+            setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, candidates.length - 1)); // Prevent going out of bounds
+            alert(`${candidateToSave.name} has been saved!`); // User feedback
         }
     };
 
-    // Move to the next candidate
     const nextCandidate = () => {
         setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, candidates.length - 1));
     };
 
-    // Get the current candidate
     const currentCandidate = candidates[currentIndex];
 
-    // Display the candidate search interface
     return (
         <div>
             <h1>Candidate Search</h1>
             {candidates.length === 0 ? (
                 <p>Loading candidates...</p>
-            ) : currentCandidate ? (
-              // Display the CandidateCard component
+            ) : currentIndex >= candidates.length ? (
+                <p>No more candidates available.</p>
+            ) : (
               <CandidateCard
                     candidate={currentCandidate}
                     onSave={saveCandidate}
                     onNext={nextCandidate}
                 />
-            ) : (
-                <p>No more candidates available.</p>
             )}
-            {/* Display the Save Candidate and Next Candidate buttons */}
             <button 
                 onClick={saveCandidate} 
                 disabled={currentIndex >= candidates.length} 
             >
-              {/*Save the current candidate*/}
                 Save Candidate
             </button>
-            {/* Move to the next candidate */}
             <button 
                 onClick={nextCandidate} 
                 disabled={currentIndex >= candidates.length - 1} 
