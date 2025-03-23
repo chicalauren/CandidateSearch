@@ -13,7 +13,7 @@
 ![saved](./image-1.png)
 
 ## Video
-![video gif](./CandidateSearch.gif)
+![video gif](./CandidateSearch.mp4)
 
 ##  TechnologyUsed
 -  **React** with **TypeScript**
