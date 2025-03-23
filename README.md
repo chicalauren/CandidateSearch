@@ -8,9 +8,9 @@
 ##  Screenshots
 
 ###  Main Page - Candidate Search
-(![main](./image.png)
+![main](./image.png)
 ###  Saved Candidates List
-(![saved](./image-1.png))
+![saved](./image-1.png)
 
 ##  TechnologyUsed
 -  **React** with **TypeScript**
