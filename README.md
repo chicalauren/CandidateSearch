@@ -22,7 +22,7 @@
 ##  Installation and Usage
 ### 1️ Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+git clone https://github.com/chicalauren.git
 cd YOUR_REPOSITORY
 ```
 ### 2️ Install dependencies
@@ -41,7 +41,7 @@ npm run dev
 
 ## Links
 -  **GitHub Repository:** [ View on GitHub](https://github.com/chicalauren)
--  **Render Deployment:** [ View on Render](#)
+-  **Render Deployment:** [ View on Render]((https://gitcandidates.netlify.app/))
 
 ##  License
 This project is licensed under the **MIT License**.
