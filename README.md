@@ -1,4 +1,4 @@
-# Module 13 Challenge: Candidate Search
+# Candidate Search
 
 ## Your Task
 
