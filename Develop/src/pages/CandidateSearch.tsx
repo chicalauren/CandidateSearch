@@ -1,16 +1,7 @@
 import { useState, useEffect } from 'react';
 import { searchGithub } from '../api/API';
-import CandidateCard from './CandidateCard'; // Fixed typo
-
-interface Candidate {
-  login: string;
-  avatar_url: string;
-  name: string;
-  location: string;
-  email: string;
-  html_url: string;
-  company: string;
-}
+import CandidateCard from '../components/CandidateCard'; // Fixed typo
+import { Candidate } from '../interfaces/Candidate.interface';
 
 const CandidateSearch: React.FC = () => {
     const [candidates, setCandidates] = useState<Candidate[]>([]);
@@ -21,28 +12,17 @@ const CandidateSearch: React.FC = () => {
     });
 
     useEffect(() => {
-        const fetchCandidates = async () => {
-            try {
-              const response = await fetch('https://api.github.com/users?since=83918688', {
-                headers: {
-                    'Authorization': `token ${import.meta.env.VITE_GITHUB_TOKEN}`, // Use import.meta.env to access the token
-                    'Accept': 'application/vnd.github.v3+json'
-                }
-            });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-        
-                const data: Candidate[] = await response.json();
-                console.log(data);
-                setCandidates(data);
-            } catch (error) {
-                console.error("Error fetching candidates:", error);
-            }
-        };
-
-        fetchCandidates();
+      const fetchCandidates = async () => {
+        try {
+            const data: Candidate[] = await searchGithub();
+            console.log(data); // Log data to check its structure
+            setCandidates(data);
+        } catch (error) {
+            console.error("Error fetching candidates:", error);
+        }
+    };
+    fetchCandidates();
+    
     }, []);
 
     const saveCandidate = () => {
@@ -72,8 +52,6 @@ const CandidateSearch: React.FC = () => {
             ) : (
               <CandidateCard
                     candidate={currentCandidate}
-                    onSave={saveCandidate}
-                    onNext={nextCandidate}
                 />
             )}
             <button 
