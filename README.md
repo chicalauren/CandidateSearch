@@ -12,6 +12,9 @@
 ###  Saved Candidates List
 ![saved](./image-1.png)
 
+## Video
+<iframe src="https://drive.google.com/file/d/1GrrpVAmc-ZN7ovFRoxKAK6wTeHziOOF1/preview" width="640" height="480"></iframe>
+
 ##  TechnologyUsed
 -  **React** with **TypeScript**
 -  **Bootstrap** for styling
