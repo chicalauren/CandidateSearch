@@ -12,9 +12,6 @@
 ###  Saved Candidates List
 ![saved](./image-1.png)
 
-## Video
-![Overview Video](https://raw.githubusercontent.com/chicalauren/CandidateSearch/main/CandidateSearch.mp4)
-
 ##  TechnologyUsed
 -  **React** with **TypeScript**
 -  **Bootstrap** for styling
