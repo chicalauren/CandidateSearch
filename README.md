@@ -1,3 +1,7 @@
+# Candidate Search
+
+Search candidates and save them throughout GitHub using the GitHub API, REACT, and TypeScript.
+
 ##  Features
 -  **Candidate Search:** Retrieves real-time data from the GitHub API.
 -  **Save Candidates:** Adds candidates to a list of potential hires.
@@ -8,9 +12,9 @@
 ##  Screenshots
 
 ###  Main Page - Candidate Search
-![main](./image.png)
+![main](./Assets/image.png)
 ###  Saved Candidates List
-![saved](./image-1.png)
+![saved](./Assets/image-1.png)
 
 ##  TechnologyUsed
 -  **React** with **TypeScript**
